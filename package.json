@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --fix --cache ./src"
+    "lint": "eslint --cache --fix  ./src",
+    "prettier": "prettier --cache --write ./src",
+    "compile": "tsc -p tsconfig.json",
+    "ready": "npm run lint && npm run prettier && npm run compile"
   },
   "keywords": [],
   "author": "Santiago Miranda <santimir@protonmail.com>",

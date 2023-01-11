@@ -4,4 +4,6 @@ images/**
 out/*
 *.zip
 .eslintcache
+.prettiercache
 package-lock.json
+lib/
