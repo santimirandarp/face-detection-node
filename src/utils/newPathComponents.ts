@@ -10,7 +10,7 @@ type OD = Exclude<ExecOptions["outDirPath"], undefined>;
  * @param absolutePath
  * @returns
  */
-export default function newPathComponents(
+export function newPathComponents(
   outDirPath: OD,
   path: string,
   pathToMainScript: string

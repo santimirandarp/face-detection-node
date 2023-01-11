@@ -6,14 +6,18 @@ import { lookup } from "mime-types";
 import { SsdMobilenetv1Options } from "@vladmandic/face-api";
 import * as canvas from "canvas";
 
-import loadNNFromOptions from "./utils/loadNNFromOptions";
+import {
+  loadNNFromOptions,
+  newPathComponents,
+  saveImage,
+  saveStats,
+  addLogEntry,
+  formatScore,
+} from "./utils/index";
 import faceapiCanvasPatch from "./patch/canvas";
-import formatScore from "./utils/formatScore";
-import newPathComponents from "./utils/newPathComponents";
 import type { ExecOptions, Logs } from "./types";
 import { score, mask } from "./utils/annotateImage";
-import { singleDetection, multiDetection } from "./helpers/detections";
-import { saveImage, saveStats } from "./utils/saveFile";
+import { singleDetection, multiDetection } from "./detectors/index";
 
 /**
  * Recursively grabs all images starting at "imgDir"
@@ -46,14 +50,15 @@ export async function faceDetection(
   } = options;
 
   const logs: Logs = {
-    filename: new Array<string>(),
-    error: new Array<string>(),
+    filename: [],
+    error: [],
     total: 0,
   };
 
   imgDir = join(mainScriptFullPath, imgDir);
   modelsDir = join(mainScriptFullPath, modelsDir);
-  // load the nn and options to faceapi object
+
+  // load the nn
   await loadNNFromOptions(detectionOptions, modelsDir);
 
   const paths = singleFile ? [imgDir] : await readdir(imgDir);
@@ -94,9 +99,7 @@ export async function faceDetection(
         saveImage(buffer, join(baseDir, "noface", filename));
       }
     } catch (e) {
-      logs.filename.push(filename);
-      logs.error.push(`${e}`);
-      logs.total += 1;
+      if (e instanceof Error) addLogEntry(logs, filename, e);
     }
   }
   // to know what was or wasn't processed

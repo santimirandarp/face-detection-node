@@ -5,7 +5,7 @@ import * as faceapi from "@vladmandic/face-api";
  * @param models - absolute path to models
  * @returns
  */
-export default async function setNNFromOptions(
+export async function loadNNFromOptions(
   opts: faceapi.FaceDetectionOptions,
   models: string
 ) {

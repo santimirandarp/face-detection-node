@@ -1,5 +1,5 @@
 import type { FaceDetection } from "@vladmandic/face-api";
-export default function formatScore(
+export function formatScore(
   detection: FaceDetection | FaceDetection[]
 ): string {
   let result = "";
