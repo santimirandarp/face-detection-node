@@ -1,8 +1,7 @@
+import readdir from "recursive-readdir";
 import { readFile } from "node:fs/promises";
 import { join } from "path";
-import readdir from "recursive-readdir";
 import { lookup } from "mime-types";
-// just a namespace import, they export all functions
 import { SsdMobilenetv1Options } from "@vladmandic/face-api";
 import * as canvas from "canvas";
 
