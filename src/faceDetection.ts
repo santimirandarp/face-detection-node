@@ -24,7 +24,7 @@ import { saveImage, saveStats } from "./utils/saveFile";
  * @param options { @link types#ExecOptions }
  */
 export async function faceDetection(
-  mainScriptFullPath: string = __dirname,
+  mainScriptFullPath: string,
   imgDir = "../images/",
   modelsDir = "./models",
   options: Partial<ExecOptions> = {}
@@ -39,7 +39,7 @@ export async function faceDetection(
     annotations = [score, mask],
     pathFilter = (filePath: string) => filePath.endsWith(".jpg"),
     detectionOptions = new SsdMobilenetv1Options({
-      minConfidence: 0.5,
+      minConfidence: 0.36,
       maxResults: 2,
     }),
     singleFile = false,
