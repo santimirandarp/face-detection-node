@@ -3,3 +3,5 @@ images/**
 *.stats.json
 out/*
 *.zip
+.eslintcache
+package-lock.json
