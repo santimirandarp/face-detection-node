@@ -41,8 +41,6 @@ The image is stored to the following output `./out/3_scored/096_077_057_testThre
 
 - This code is under [MIT](./LICENSE)
 
-All images used for training are in the public domain.
-
 [ci-image]: https://github.com/santimirandarp/face-detection-node/workflows/Linters/badge.svg?branch=main
 [ci-url]: https://github.com/santimirandarp/face-detection-node/actions?query=workflow%3A%22Node.js+CI%22
 [codecov-image]: https://img.shields.io/codecov/c/github/santimirandarp/face-detection-node.svg
