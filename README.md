@@ -10,7 +10,7 @@ Take a look at the [examples](./examples) folder.
 1. Clone the project
 2. `npm i` to install deps.
 
-Recommendation: run the examples first, using `ts-node example1.ts` or `ts-node example2.ts`.
+Recommendation: run the example first, using `ts-node examples/examples.ts`.
 
 ## Original Image
 
