@@ -1,4 +1,3 @@
-import "@tensorflow/tfjs-node";
 import { env } from "@vladmandic/face-api";
 import { Canvas, Image, ImageData } from "canvas";
 

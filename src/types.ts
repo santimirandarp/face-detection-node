@@ -1,42 +1,71 @@
-import { FaceDetectionOptions } from "@vladmandic/face-api";
-import { Annotation } from "./utils/annotateImage";
+import type {
+  FaceDetection,
+  SsdMobilenetv1Options,
+  TinyFaceDetectorOptions,
+} from "@vladmandic/face-api";
+
+export type Image = any;
+export type AnnotatedImage = any;
+export type Annotation = (
+  img: Image,
+  detection: FaceDetection | FaceDetection[]
+) => AnnotatedImage;
 
 export interface Logs {
   filename: string[];
   error: string[];
   total: number;
 }
-export interface ExecOptions {
+
+export interface ConfigModel {
   /**
-   * where to save the stats of what was processed
-   * by default it wont save
-   * @default undefined
-   */
-  outStatsPath?: string;
-  /*
-   * set the file path, or edit this function's input path
-   * The function is run for each file, so it is quite expensive.
-   */
-  outDirPath?: string | ((dirname: string) => string);
-  /**
-   * @default false
+   * Defines whether to use singleFaceDetector, or multiFaceDetector.
+   * @defaultValue false
    */
   singleFace?: boolean;
   /**
-   *
-   * @param absoluteFilePath
-   * @returns
-   * @default - test for jpg extension
+   * The Tiny one is less accurate, way lighter and faster.
+   * @defaultValue `new SsdMobilenetv1Options({minConfidence:0.5, maxResults:1})`
    */
-  pathFilter?: (absoluteFilePath: string) => boolean;
+  detectionOptions?: SsdMobilenetv1Options | TinyFaceDetectorOptions;
   /**
-   * By default detectAllFaces and detectSingleFace utilize the SSD Mobilenet V1 Face Detector.
-   * @default new SsdMobilenetv1Options({minConfidence:0.5, maxResults:1})
-   */
-  detectionOptions?: FaceDetectionOptions;
-  /**
-   * Array of functions that independently annotate the image
+   * Array of functions with access to detection @see {@link Annotation}
+   * @defaultValue `[score, mask]`
    */
   annotations?: Annotation[];
-  singleFile?: boolean;
 }
+
+/** Addresses used by the programs, or the default is used if the address is not present. */
+export interface ConfigPaths {
+  /*
+   * remaining paths are relative to this one.
+   * Pass `__dirname` or an equivalent.
+   */
+  root: FullPath;
+  /** @defaultValue "../images/", where to search for images relative to main script path */
+  imgDirOrFile?: RelativePath;
+  /** @defaultValue "./models", where to search for models relative to main script path */
+  modelsDir?: RelativePath;
+  /**
+   * set the file path, or edit this function's input path
+   * @defaultValue "./out", directory from where to store images
+   */
+  outDir?: RelativePath;
+  /**
+   * function must return true if the path should be ignored
+   */
+  ignore?: ((root: FullPath) => boolean) | null;
+  /**
+   * @defaultValue true, if true, the user will be prompted to confirm the paths once.
+   */
+  confirmPaths?: boolean;
+}
+
+export type FullPath = string;
+export type RelativePath = string;
+
+export type Detections = {
+  input: FullPath;
+  detection: null | FaceDetection | FaceDetection[];
+  outputs?: FullPath[];
+};

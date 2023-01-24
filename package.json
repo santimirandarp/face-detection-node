@@ -1,33 +1,52 @@
 {
   "name": "face-detection-node",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Face Detection",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "src",
+    "lib"
+  ],
   "scripts": {
-    "lint": "eslint --cache --fix  ./src",
-    "prettier": "prettier --cache --write ./src",
-    "compile": "tsc -p tsconfig.json",
-    "ready": "npm run lint && npm run prettier && npm run compile"
+    "eslint": "eslint ./src/**/*.ts",
+    "prettier": "prettier ./src -c",
+    "check-types": "tsc --noEmit",
+    "covtest": "vitest --coverage --run --environment=node --threads=false --segfaultRetry=5",
+    "isReady": "npm run covtest && npm run eslint && npm run prettier && npm run check-types",
+    "eslint-fix": "eslint --cache --fix  ./src/**/*.ts",
+    "prettier-write": "prettier --cache --write ./src ",
+    "compile": "tsc -p tsconfig.json"
   },
   "keywords": [],
   "author": "Santiago Miranda <santimir@protonmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/santimirandarp/face-detection-node"
+  },
   "license": "MIT",
   "dependencies": {
     "@tensorflow/tfjs-node": "^4.2.0",
     "@vladmandic/face-api": "^1.7.8",
     "canvas": "^2.11.0",
     "mime-types": "^2.1.35",
+    "readline-sync": "^1.4.10",
     "recursive-readdir": "^2.2.3"
   },
   "devDependencies": {
     "@types/mime-types": "^2.1.1",
+    "@types/node": "^18.11.18",
+    "@types/readline-sync": "^1.4.4",
     "@types/recursive-readdir": "^2.2.1",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
+    "@vitest/coverage-c8": "^0.27.2",
     "eslint": "^8.31.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-tsdoc": "^0.2.17",
     "prettier": "^2.8.2",
-    "typescript": "^4.9.4"
+    "typedoc": "^0.23.24",
+    "typescript": "^4.9.4",
+    "vitest": "^0.27.2"
   }
 }

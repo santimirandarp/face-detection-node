@@ -1,11 +1,44 @@
-# face detector
+# face-detection-node
 
-Code adapted from `face-api` only for face detection. It allows executing it quickly.
+[![build status][ci-image]][ci-url]
+[![Test coverage][codecov-image]][codecov-url]
 
-## Run
+Face detection with a few options. Based off [face-api](https://github.com/vladmandic/face-api).
 
-The simplest way is to:
+Take a look at the [examples](./examples) folder. 
 
-- clone the project
-- add your images folder named `images` (can have any number of folders inside.)
-- Run `ts-node run.ts`
+1. Clone the project
+2. `npm i` to install deps.
+
+Recommendation: run the examples first, using `ts-node example1.ts` or `ts-node example2.ts`.
+
+## Original Image
+
+![original](./examples/in/testThreeFaces.jpg)
+
+## Mask (hides face)
+
+![masked](./examples/out/3_mask/096_077_057_testThreeFaces.jpg)
+
+The image is stored to the following output `./out/3_mask/096_077_057_testThreeFaces.jpg`
+
+## Score (confidence)
+
+![scored](./examples/out/3_score/096_077_057_testThreeFaces.jpg)
+
+The image is stored to the following output `./out/3_scored/096_077_057_testThreeFaces.jpg`
+
+## To-Do / Try
+
+- [Try this project](https://github.com/vladmandic/human), that could replace `face-api`
+- Try to use only tensorflow
+
+## License
+
+This code is under [MIT](./LICENSE)
+
+[ci-image]: https://github.com/santimirandarp/face-detection-node/workflows/Linters/badge.svg?branch=main
+[ci-url]: https://github.com/santimirandarp/face-detection-node/actions?query=workflow%3A%22Node.js+CI%22
+[codecov-image]: https://img.shields.io/codecov/c/github/santimirandarp/face-detection-node.svg
+[codecov-url]: https://codecov.io/gh/santimirandarp/face-detection-node
+
